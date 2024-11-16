@@ -1,10 +1,11 @@
 import classes from "./Modal.module.css";
 
-function Modal() {
+// eslint-disable-next-line react/prop-types
+function Modal({children, onClose}) {
   return (
     <>
-      <div className={classes.backdrop} />
-      <dialog className={classes.modal}></dialog>
+      <div className={classes.backdrop} onClick={onClose}/>
+      <dialog open className={classes.modal}>{children}</dialog>
     </>
   );
 }
