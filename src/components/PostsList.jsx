@@ -1,36 +1,26 @@
-import { useState } from 'react';
 import Post from "./Post";
 import NewPost from './NewPost';
 import classes from './Post.module.css';
 import Modal from './Modal'
+import { useState } from 'react';
 
 // eslint-disable-next-line react/prop-types
 function PostsList({isPosting, onStopPosting}) {
-  const [enteredBody, setEnteredBody] = useState("");
-  const [enteredAuthor, setEnteredAuthor] = useState("");
+  const [posts, setPosts] = useState([]);
 
-
-  function bodyChangeHandler(event) {
-    setEnteredBody(event.target.value);
-  }
-
-  function authorChangeHandler(event) {
-    setEnteredAuthor(event.target.value);
+  function addPostHandler(postData){
+    setPosts((existingPosts) => [postData, ...existingPosts]);
   }
 
   return (
     <>
-    {isPosting ? <Modal onClose={onStopPosting}>
-      <NewPost
-        onBodyChange={bodyChangeHandler}
-        onAuthorChange={authorChangeHandler}
-        onCancel={onStopPosting}
-      />
-      </Modal> : false}
-    
+    {isPosting && ( 
+      <Modal onClose={onStopPosting}>
+      <NewPost onCancel={onStopPosting} onAddPost={addPostHandler} />
+      </Modal>
+      )}
       <ul className={classes.posts}>
-        <Post author={enteredAuthor} body={enteredBody} />
-        <Post author="Sara" body="Check it out" />
+        {posts.map((post) => <Post key={post.body} author={post.author} body={post.body}/>)}
       </ul>
     </>
   );
