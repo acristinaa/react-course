@@ -5,7 +5,7 @@ import MainHeader from "./components/MainHeader";
 
 
 function App() {
-  const [visibleModal, setModalVisible] = useState(true);
+  const [visibleModal, setModalVisible] = useState(false);
 
   function showModalHandler(){
     setModalVisible(true);
