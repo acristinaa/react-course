@@ -1,6 +1,7 @@
 import classes from "./NewPost.module.css";
 import PropTypes from "prop-types";
 import { useState } from "react";
+import Modal from '../Modal';
 
 // eslint-disable-next-line react/prop-types
 function NewPost({ onCancel, onAddPost }) {
@@ -26,6 +27,7 @@ function NewPost({ onCancel, onAddPost }) {
   }
 
   return (
+    <Modal>
     <form className={classes.form} onSubmit={submitHandler}>
       <p>
         <label htmlFor="body">Text</label>
@@ -41,6 +43,7 @@ function NewPost({ onCancel, onAddPost }) {
       </button>
       <button>Submit</button>
     </form>
+    </Modal>
   );
 }
 
