@@ -1,17 +1,21 @@
-import {Outlet} from 'react-router-dom'
+import { Outlet } from "react-router-dom";
 import PostsList from "../PostsList";
-//import Modal from './components/Modal';
-
 
 function Posts() {
   return (
-  <>
-  <Outlet />
-    <main>
-      <PostsList />
-    </main>
+    <>
+      <Outlet />
+      <main>
+        <PostsList />
+      </main>
     </>
   );
 }
 
 export default Posts;
+
+export async function loader() {
+  const response = await fetch('http://localhost:8080/posts');
+  const resData = await response.json();
+  return resData.posts;
+}
