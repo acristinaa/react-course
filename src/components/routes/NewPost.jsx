@@ -1,5 +1,4 @@
 import classes from "./NewPost.module.css";
-import PropTypes from "prop-types";
 import Modal from '../Modal';
 import { Link, Form, redirect } from "react-router-dom";
 
@@ -27,10 +26,10 @@ function NewPost() {
   );
 }
 
-NewPost.propTypes = {
+/*NewPost.propTypes = {
   onBodyChange: PropTypes.func.isRequired,
   onAuthorChange: PropTypes.func.isRequired,
-};
+};*/
 
 export default NewPost;
 
@@ -44,6 +43,10 @@ export async function action({request}) {
       "Content-Type": "application/json",
     },
   });
+
+  if(!Response.ok){
+    throw new Error('Could not save post.');
+  }
 
   return redirect('/');
 }
